@@ -1,5 +1,6 @@
 using ControleDeMedicamentos.ConsoleApp.Compartilhado.Arquivos;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedores;
+using ControleDeMedicamentos.ConsoleApp.ModuloFuncionarios;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamentos;
 using ControleDeMedicamentos.ConsoleApp.ModuloPacientes;
 using ControleDeMedicamentos.ConsoleApp.ModuloRequisicoes;
@@ -12,13 +13,16 @@ public class TelaPrincipal
     private readonly TelaMedicamento telaMedicamento;
     private readonly TelaRequisicaoEntrada telaRequisicaoEntrada;
     private readonly TelaPaciente telaPaciente;
+    private readonly TelaFuncionario telaFuncionario;
     public TelaPrincipal(ContextoJson contexto)
     {
         RepositorioFornecedorEmArquivo repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
         RepositorioMedicamentoEmArquivo repositorioMedicamento = new RepositorioMedicamentoEmArquivo(contexto);
         RepositorioRequisicaoEntradaEmArquivo repositorioRequisicao = new RepositorioRequisicaoEntradaEmArquivo(contexto);
         RepositorioPacienteEmArquivo repositorioPacienteEmArquivo = new RepositorioPacienteEmArquivo(contexto);
+        RepositorioFuncionarioEmArquivo repositorioFuncionarioEmArquivo = new RepositorioFuncionarioEmArquivo(contexto);
 
+        telaFuncionario = new TelaFuncionario(repositorioFuncionarioEmArquivo);
         telaPaciente = new TelaPaciente(repositorioPacienteEmArquivo);
         telaFornecedor = new TelaFornecedor(repositorioFornecedor);
         telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
@@ -36,6 +40,7 @@ public class TelaPrincipal
         Console.WriteLine("3 - Gestão de Requisições de Entrada");
         Console.WriteLine("4 - Gestão de Requisições de Saida");
         Console.WriteLine("5 - Gestão de Pacientes");
+        Console.WriteLine("6 - Gestão de Funcionarios");
         Console.WriteLine("S - Sair");
         Console.WriteLine("---------------------------------");
         Console.Write("> ");
@@ -57,6 +62,8 @@ public class TelaPrincipal
         if (opcaoMenuPrincipal == "5")
             return telaPaciente;
 
+        if (opcaoMenuPrincipal == "6")
+            return telaFuncionario;
         return null;
     }
 }
