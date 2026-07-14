@@ -29,7 +29,8 @@ Cadastro completo (registrar, visualizar, editar, excluir) de quem fornece os me
 - Nome (3-100 caracteres), Telefone `(XX) XXXXX-XXXX`, CNPJ (14 dígitos)
 - Não permite dois fornecedores com o mesmo CNPJ
 
-<!-- GIF: Fornecedores -->
+![Módulo de Fornecedores](docs/fornecedores.gif)
+
 
 ---
 
@@ -39,7 +40,7 @@ Cadastro completo dos medicamentos, cada um vinculado a um fornecedor. Exibe a q
 
 - Nome (2-100 caracteres), Descrição (5-255 caracteres), Fornecedor obrigatório
 
-<!-- GIF: Medicamentos -->
+![Módulo de Medicamentos](docs/Medicamentos.gif)
 
 ---
 
@@ -50,7 +51,7 @@ Cadastro completo de quem recebe os medicamentos.
 - Nome (3-100 caracteres), Telefone `(XX) XXXXX-XXXX`, Cartão do SUS (15 dígitos), CPF (11 dígitos)
 - Não permite dois pacientes com o mesmo cartão do SUS
 
-<!-- GIF: Pacientes -->
+![Módulo de Pacientes](docs/Pacientes.gif)
 
 ---
 
@@ -61,7 +62,7 @@ Cadastro completo da equipe da unidade.
 - Nome (3-100 caracteres), Telefone `(XX) XXXXX-XXXX`, CPF (11 dígitos)
 - Não permite dois funcionários com o mesmo CPF
 
-<!-- GIF: Funcionários -->
+![Módulo de Funcionários](docs/Funcionario.gif)
 
 ---
 
@@ -72,7 +73,7 @@ Registra a chegada de medicamentos ao estoque. Só permite **registrar** e **vis
 - Medicamento obrigatório, Quantidade maior que zero
 - **Soma** a quantidade ao estoque do medicamento
 
-<!-- GIF: Requisições de Entrada -->
+![Módulo de Requisições de Entrada](docs/RequisicaoEntrada.gif)
 
 ---
 
@@ -84,7 +85,7 @@ Registra a dispensação de um medicamento a um paciente. Também só permite **
 - **Não permite** requisição que exceda o estoque disponível
 - **Subtrai** a quantidade do estoque do medicamento
 
-<!-- GIF: Requisições de Saída -->
+![Módulo de Requisições de Saída](docs/RequisicaoSaida.gif)
 
 ---
 
