@@ -1,158 +1,99 @@
 # Controle de Medicamentos
 
-## Projeto
+Sistema de console para gerenciar o estoque de medicamentos de uma unidade de saúde: cadastra fornecedores, medicamentos, pacientes e funcionários, e controla a entrada e a saída de medicamentos do estoque.
 
-Desenvolvido durante o curso Backend da [Academia do Programador](https://www.academiadoprogramador.net) 2026
+O estoque não é um número guardado — ele é **calculado** a partir do histórico: a soma de todas as entradas menos a soma de todas as saídas de cada medicamento.
 
-## Funcionalidades
+Os dados são persistidos em um arquivo JSON local, então tudo que você cadastra continua lá na próxima vez que abrir o programa.
 
-### 1. Módulo de Fornecedores
-
-**Requisitos Funcionais**
-
-- O sistema deve permitir registrar novos fornecedores
-- O sistema deve permitir visualizar todos os fornecedores cadastrados
-- O sistema deve permitir editar fornecedores existentes
-- O sistema deve permitir excluir fornecedores cadastrados
-
-**Regras de Negócio**
-
-Campos obrigatórios:
-
-- Nome (3-100 caracteres)
-- Telefone (formatos válidos)
-- CNPJ (14 dígitos)
-
-> O sistema não deve permitir cadastro de fornecedores com mesmo CNPJ
+Desenvolvido durante o curso Backend da [Academia do Programador](https://www.academiadoprogramador.net) 2026.
 
 ---
 
-### 2. Módulo de Pacientes
+## Como executar
 
-**Requisitos Funcionais**
+```bash
+dotnet run --project ControleDeMedicamentos.ConsoleApp
+```
 
-- O sistema deve permitir registrar novos pacientes
-- O sistema deve permitir visualizar todos os pacientes cadastrados
-- O sistema deve permitir editar pacientes existentes
-- O sistema deve permitir excluir pacientes cadastrados
-
-**Regras de Negócio**
-
-Campos obrigatórios:
-
-- Nome (3-100 caracteres)
-- Telefone (formatos válidos: (XX) XXXX-XXXX ou (XX) XXXXX-XXXX)
-- Cartão do SUS (15 dígitos)
-- CPF (11 dígitos)
-
-> O sistema não deve permitir cadastro de pacientes com mesmo cartão do SUS
+Requer o **.NET 10.0 SDK**.
 
 ---
 
-### 3. Módulo de Medicamentos
+## Módulos
 
-**Requisitos Funcionais**
+### 1. Fornecedores
 
-- O sistema deve permitir registrar novos medicamentos
-- O sistema deve permitir visualizar todos os medicamentos cadastrados
-- O sistema deve permitir editar medicamentos existentes
-- O sistema deve permitir excluir medicamentos cadastrados
+Cadastro completo (registrar, visualizar, editar, excluir) de quem fornece os medicamentos.
 
-**Regras de Negócio**
+- Nome (3-100 caracteres), Telefone `(XX) XXXXX-XXXX`, CNPJ (14 dígitos)
+- Não permite dois fornecedores com o mesmo CNPJ
 
-Campos obrigatórios:
-
-- Nome (3-100 caracteres)
-- Descrição (5-255 caracteres)
-- Quantidade em estoque (número positivo)
-- Fornecedor
-
-> O sistema deve destacar medicamentos com menos de 20 unidades como "em falta"
-
-> O sistema deve atualizar a quantidade quando o medicamento já estiver cadastrado
+<!-- GIF: Fornecedores -->
 
 ---
 
-### 4. Módulo de Funcionários
+### 2. Medicamentos
 
-**Requisitos Funcionais**
+Cadastro completo dos medicamentos, cada um vinculado a um fornecedor. Exibe a quantidade em estoque calculada em tempo real.
 
-- O sistema deve permitir registrar novos funcionários
-- O sistema deve permitir visualizar todos os funcionários cadastrados
-- O sistema deve permitir editar funcionários existentes
-- O sistema deve permitir excluir funcionários cadastrados
+- Nome (2-100 caracteres), Descrição (5-255 caracteres), Fornecedor obrigatório
 
-**Regras de Negócio**
-
-Campos obrigatórios:
-
-- Nome (3-100 caracteres)
-- Telefone (formatos válidos)
-- CPF (11 dígitos)
-
-> O sistema não deve permitir cadastro de funcionários com mesmo CPF
+<!-- GIF: Medicamentos -->
 
 ---
 
-### 5. Módulo de Estoque
+### 3. Pacientes
 
-#### 5.1 Requisições de Entrada
+Cadastro completo de quem recebe os medicamentos.
 
-**Requisitos Funcionais para Requisições de Entrada**
+- Nome (3-100 caracteres), Telefone `(XX) XXXXX-XXXX`, Cartão do SUS (15 dígitos), CPF (11 dígitos)
+- Não permite dois pacientes com o mesmo cartão do SUS
 
-- O sistema deve permitir registrar novas requisições de entrada
-- O sistema deve permitir visualizar todas as requisições de entrada
-
-**Regras de Negócio para Requisições de Entrada**
-
-Campos obrigatórios:
-
-- Data (válida)
-- Medicamento (seleção obrigatória)
-- Funcionário (seleção obrigatória)
-- Quantidade (número positivo)
-
-> O sistema deve atualizar o estoque ao registrar a requisição de entrada
+<!-- GIF: Pacientes -->
 
 ---
 
-#### 5.2 Requisições de Saída
+### 4. Funcionários
 
-**Requisitos Funcionais para Requisições de Saída**
+Cadastro completo da equipe da unidade.
 
-- O sistema deve permitir registrar novas requisições de saída
-- O sistema deve permitir visualizar todas as requisições de saída
+- Nome (3-100 caracteres), Telefone `(XX) XXXXX-XXXX`, CPF (11 dígitos)
+- Não permite dois funcionários com o mesmo CPF
 
-**Regras de Negócio para Requisições de Saída**
-
-Campos obrigatórios:
-
-- Data (válida)
-- Paciente (seleção obrigatória)
-- Medicamentos Requisitados (seleção obrigatória)
-
-> O sistema não deve permitir requisição que exceda o estoque disponível
-
-> O sistema deve subtrair a quantidade do estoque ao registrar a requisição
+<!-- GIF: Funcionários -->
 
 ---
 
-## Como utilizar
+### 5. Requisições de Entrada
 
-1. Clone o repositório ou baixe o código fonte.
-2. Abra o terminal ou o prompt de comando e navegue até a pasta raiz
-3. Utilize o comando abaixo para restaurar as dependências do projeto.
+Registra a chegada de medicamentos ao estoque. Só permite **registrar** e **visualizar** — uma movimentação de estoque é um fato histórico e não deve ser alterada.
 
-   ```bash
-   dotnet restore
-   ```
+- Medicamento obrigatório, Quantidade maior que zero
+- **Soma** a quantidade ao estoque do medicamento
 
-4. Para executar o projeto compilando em tempo real
+<!-- GIF: Requisições de Entrada -->
 
-   ```bash
-   dotnet run --project ControleDeMedicamentos.ConsoleApp
-   ```
+---
 
-## Requisitos
+### 6. Requisições de Saída
 
-- .NET 10.0 SDK
+Registra a dispensação de um medicamento a um paciente. Também só permite **registrar** e **visualizar**.
+
+- Paciente e Medicamento obrigatórios, Quantidade maior que zero
+- **Não permite** requisição que exceda o estoque disponível
+- **Subtrai** a quantidade do estoque do medicamento
+
+<!-- GIF: Requisições de Saída -->
+
+---
+
+## Onde os dados ficam
+
+O arquivo `dados.json` é gravado em:
+
+```
+%LOCALAPPDATA%\ControleDeMedicamentos-Backend\dados.json
+```
+
+Apagar esse arquivo zera o sistema.

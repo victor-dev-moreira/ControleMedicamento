@@ -11,7 +11,7 @@ public abstract class RepositorioBaseEmArquivo<TEntidade> where TEntidade : Enti
         registros = ObterRegistros();
     }
 
-    public void Cadastrar(TEntidade novoRegistro)
+    public virtual void Cadastrar(TEntidade novoRegistro)
     {
         int ultimoId = 0;
 
