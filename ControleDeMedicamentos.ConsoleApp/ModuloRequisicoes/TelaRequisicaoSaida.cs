@@ -98,8 +98,8 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaOpcoes, ITela
     private void VisualizarMedicamentos()
     {
         Console.WriteLine(
-            "{0, -7} | {1, -20} | {2, -20} | {3, -20}",
-            "Id", "Nome", "Fornecedor", "Descrição"
+            "{0, -7} | {1, -20} | {2, -20} | {3, -20} | {4, -10}",
+            "Id", "Nome", "Fornecedor", "Descrição", "Estoque"
         );
 
         List<Medicamento> registros = repositorioMedicamento.SelecionarTodos();
@@ -107,8 +107,8 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaOpcoes, ITela
         foreach (Medicamento m in registros)
         {
             Console.WriteLine(
-                "{0, -7} | {1, -20} | {2, -20} | {3, -20}",
-                m.Id, m.Nome, m.Fornecedor.Nome, m.Descricao
+                "{0, -7} | {1, -20} | {2, -20} | {3, -20} | {4, -10}",
+                m.Id, m.Nome, m.Fornecedor.Nome, m.Descricao, m.QuantidadeEmEstoque
             );
         }
     }
