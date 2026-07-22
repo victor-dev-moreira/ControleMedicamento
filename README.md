@@ -13,7 +13,7 @@ Desenvolvido durante o curso Backend da [Academia do Programador](https://www.ac
 ## Como executar
 
 ```bash
-dotnet run --project ControleDeMedicamentos.ConsoleApp
+dotnet run --project ControleDeMedicamentos.WebApp
 ```
 
 Requer o **.NET 10.0 SDK**.
