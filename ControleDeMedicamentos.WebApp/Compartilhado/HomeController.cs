@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-namespace ControleDeMedicamentos.WebApp.Controllers;
+namespace ControleDeMedicamentos.WebApp.Compartilhado;
 
 public class HomeController : Controller
 {

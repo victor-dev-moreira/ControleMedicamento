@@ -1,0 +1,45 @@
+@using ControleDeMedicamentos.WebApp.ModuloFornecedores
+
+@model List<Fornecedor>
+
+<h2>Controle de Medicamentos</h2>
+
+<hr />
+<a href="/">Inicio</a> /
+<a href="/Fornecedor/Listar">Fornecedores</a> /
+<hr />
+
+<h1>Listagem De Fornecedores</h1>
+
+<p>
+    <a href="Cadastrar">Cadastrar Fornecedor</a>
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>CNPJ</th>
+            <th>Acões</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (Fornecedor f in Model)
+        {
+            <tr>
+                <td>@f.Id</td>
+                <td>@f.Nome</td>
+                <td>@f.Telefone</td>
+                <td>@f.Cnpj</td>
+                <td>
+                    <a href="Editar/@f.Id">Editar</a>
+                    <span> | </span>
+                    <a href="Excluir/@f.Id">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

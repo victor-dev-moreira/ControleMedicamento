@@ -1,0 +1,20 @@
+<h2>Controle de Medicamentos</h2>
+
+<hr />
+<a href="/">Inicio</a> /
+<a href="/Fornecedor/Listar">Fornecedores</a> /
+<hr />
+
+<h1>Excluir De Fornecedor</h1>
+
+<form action="/Fornecedor/Excluir/@Model.Id" method="post">
+    <p>
+        Você deseja realmente excluir o registro "@Model.Nome"? Esta acão é irreversível.
+    </p>
+
+    <button type="submit">Confirmar Edicão</button>
+</form>
+
+<p>
+    <a href="Listar">Voltar para a Lista</a>
+</p>
