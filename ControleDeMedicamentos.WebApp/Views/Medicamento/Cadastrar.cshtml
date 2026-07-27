@@ -1,0 +1,46 @@
+@using ControleDeMedicamentos.WebApp.ModuloFornecedores
+
+<h2>Controle de Medicamentos</h2>
+
+<hr />
+<a href="/">Inicio</a> /
+<a href="/Fornecedor/Listar">Fornecedores</a> /
+<a href="/Medicamento/Listar">Medicamentos</a> /
+<hr />
+
+<h1>Cadastro De Medicamento</h1>
+
+<p>
+    <a href="Cadastrar">Cadastrar Medicamento</a>
+</p>
+
+<form action="Cadastrar" method="post">
+    <div>
+        <label for="nome">Nome</label>
+    </br>
+    <input type="text" name="nome" id="nome">
+</div>
+<div>
+    <label for="descricao">Descrição</label>
+</br>
+<textarea name="descricao" id="descricao"></textarea>
+</div>
+<div>
+    <label for="fornecedor">Fornecedor</label>
+</br>
+<select name="fornecedorId" id="fornecedorId">
+    @foreach (Fornecedor f in ViewBag.Fornecedores)
+    {
+        <option value="@f.Id">@f.Nome</option>
+    }
+
+</select>
+
+</div>
+
+<button type="submit">Cadastrar</button>
+</form>
+
+<p>
+    <a href="/Medicamento/Listar">Voltar para a Lista</a>
+</p>
