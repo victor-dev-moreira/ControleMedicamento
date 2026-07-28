@@ -7,9 +7,9 @@
 <a href="/Funcionario/Listar">Funcionarios</a> /
 <hr />
 
-<h1>Edição De Fornecedor</h1>
+<h1>Edição De Funcionarios</h1>
 
-<form action="/Fornecedor/Editar/@Model.Id" method="post">
+<form action="/Funcionario/Editar/@Model.Id" method="post">
     <div>
         <label for="nome">Nome</label>
         <input type="text" name="nome" id="nome" value="@Model.Nome">
@@ -19,8 +19,8 @@
         <input type="text" name="telefone" id="telefone" value="@Model.Telefone">
     </div>
     <div>
-        <label for="cnpj">CNPJ</label>
-        <input type="text" name="cnpj" id="cnpj" value="@Model.Cnpj">
+        <label for="cpf">CPF</label>
+        <input type="text" name="cpf" id="cpf" value="@Model.Cpf">
     </div>
 
     <button type="submit">Confirmar Edicão</button>
