@@ -1,19 +1,27 @@
+@model ExcluirFuncionarioViewModel;
+
 <h2>Controle de Medicamentos</h2>
 
 <hr />
-<a href="/">Inicio</a> /
-<a href="/Fornecedor/Listar">Fornecedores</a> /
-<a href="/Medicamento/Listar">Medicamentos</a> /
-<a href="/Funcionario/Listar">Funcionarios</a> /
-<a href="/Paciente/Listar">Pacientes</a> /
+<a asp-controller="Home" asp-action="Index">Inicio</a> /
+<a asp-controller="Fornecedor" asp-action="Listar">Fornecedores</a> /
+<a asp-controller="Medicamento" asp-action="Listar">Medicamentos</a> /
+<a asp-controller="Funcionario" asp-action="Listar">Funcionarios</a> /
+<a asp-controller="Paciente" asp-action="Listar">Pacientes</a> /
 <hr />
 
-<h1>Excluir De Funcionario</h1>
+<h1>Exclsão De Funcionario</h1>
 
-<form action="/Funcionario/Excluir/@Model.Id" method="post">
+<form asp-action="Excluir" asp-route-id="@Model.Id" method="post">
     <p>
         Você deseja realmente excluir o registro "@Model.Nome"? Esta acão é irreversível.
     </p>
+
+    <div>
+        <label asp-for="Nome"></label>
+        <br>
+        <input asp-for="Nome" type="text" readonly>
+    </div>
 
     <button type="submit">Confirmar Exclusão</button>
 </form>

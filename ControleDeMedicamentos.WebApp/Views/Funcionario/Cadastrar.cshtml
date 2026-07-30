@@ -3,11 +3,11 @@
 <h2>Controle de Medicamentos</h2>
 
 <hr />
-<a href="/">Inicio</a> /
-<a href="/Fornecedor/Listar">Fornecedores</a> /
-<a href="/Medicamento/Listar">Medicamentos</a> /
-<a href="/Funcionario/Listar">Funcionarios</a> /
-<a href="/Paciente/Listar">Pacientes</a> /
+<a asp-controller="Home" asp-action="Index">Inicio</a> /
+<a asp-controller="Fornecedor" asp-action="Listar">Fornecedores</a> /
+<a asp-controller="Medicamento" asp-action="Listar">Medicamentos</a> /
+<a asp-controller="Funcionario" asp-action="Listar">Funcionarios</a> /
+<a asp-controller="Paciente" asp-action="Listar">Pacientes</a> /
 <hr />
 
 <h1>Cadastro De Funcionario</h1>
@@ -16,26 +16,26 @@
     <a href="Cadastrar">Cadastrar Funcionario</a>
 </p>
 
-<form action="Cadastrar" method="post">
+<form asp-action="Cadastrar" method="post">
     <div>
-        <label for="nome">Nome</label>
+        <label asp-for="Nome"></label>
         <br>
-        <input type="text" name="nome" id="nome">
+        <input asp-for="Nome" type="text">
     </div>
     <div>
-        <label for="telefone">Telefone</label>
+        <label asp-for="Telefone"></label>
         <br>
-        <input type="text" name="telefone" id="telefone">
+        <input asp-for="Telefone" type="text">
     </div>
     <div>
-        <label for="cpf">CPF</label>
+        <label asp-for="Cpf"></label>
         <br>
-        <input type="text" name="cpf" id="cpf">
+        <input asp-for="Cpf" type="text">
     </div>
 
-    <button type="submit">Cadastrar</button>
+    <button type="submit"></button>
 </form>
 
 <p>
-    <a href="Listar">Voltar para a Lista</a>
+    <a asp-action="Listar">Voltar para a Lista</a>
 </p>
