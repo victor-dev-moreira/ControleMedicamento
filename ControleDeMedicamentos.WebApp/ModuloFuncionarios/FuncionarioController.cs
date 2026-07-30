@@ -5,19 +5,33 @@ namespace ControleDeMedicamentos.WebApp.ModuloFuncionarios;
 
 public sealed class FuncionarioController : Controller
 {
-    private readonly RepositorioFuncionarioEmArquivo repositorioFuncionario;
+    private readonly RepositorioPacienteEmArquivo repositorioFuncionario;
     public FuncionarioController()
     {
         ContextoJson contextoJson = new ContextoJson();
         contextoJson.Carregar();
-        repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextoJson);
+        repositorioFuncionario = new RepositorioPacienteEmArquivo(contextoJson);
     }
 
     [HttpGet]
     public ActionResult Listar()
     {
         List<Funcionario> funcionarios = repositorioFuncionario.SelecionarTodos();
-        return View(funcionarios);
+
+        List<ListarFuncionarioViewModel> viewModels = new List<ListarFuncionarioViewModel>();
+
+        foreach (Funcionario f in funcionarios)
+        {
+            ListarFuncionarioViewModel vm = new ListarFuncionarioViewModel(
+                f.Id,
+                f.Nome,
+                f.Telefone
+            );
+
+            viewModels.Add(vm);
+        }
+
+        return View(viewModels);
     }
 
     [HttpGet]
@@ -27,10 +41,14 @@ public sealed class FuncionarioController : Controller
     }
 
     [HttpPost]
-    public ActionResult Cadastrar(string nome, string telefone, string cpf)
+    public ActionResult Cadastrar(CadastrarFuncionarioViewModel cadastrarVm)
     {
-        Funcionario funcionarios = new Funcionario(nome, telefone, cpf);
-        repositorioFuncionario.Cadastrar(funcionarios);
+        Funcionario funcionario = new Funcionario(
+            cadastrarVm.Nome,
+            cadastrarVm.Telefone,
+            cadastrarVm.Cpf);
+
+        repositorioFuncionario.Cadastrar(funcionario);
 
         return RedirectToAction(nameof(Listar));
     }
@@ -38,7 +56,7 @@ public sealed class FuncionarioController : Controller
     [HttpGet]
     public ActionResult Editar(int id)
     {
-        Funcionario funcionarios = repositorioFuncionario.SelecionarPorId(id);
+        Funcionario? funcionarios = repositorioFuncionario.SelecionarPorId(id);
         if (funcionarios == null)
             return NotFound();
 
@@ -62,7 +80,7 @@ public sealed class FuncionarioController : Controller
 
     public ActionResult Excluir(int id)
     {
-        Funcionario funcionarios = repositorioFuncionario.SelecionarPorId(id);
+        Funcionario? funcionarios = repositorioFuncionario.SelecionarPorId(id);
         if (funcionarios == null)
             return NotFound();
 

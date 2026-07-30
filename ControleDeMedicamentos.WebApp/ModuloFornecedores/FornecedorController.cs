@@ -38,7 +38,7 @@ public sealed class FornecedorController : Controller
     [HttpGet]
     public ActionResult Editar(int id)
     {
-        Fornecedor fornecedor = repositorio.SelecionarPorId(id);
+        Fornecedor? fornecedor = repositorio.SelecionarPorId(id);
         if (fornecedor == null)
             return NotFound();
 
@@ -62,7 +62,7 @@ public sealed class FornecedorController : Controller
 
     public ActionResult Excluir(int id)
     {
-        Fornecedor fornecedor = repositorio.SelecionarPorId(id);
+        Fornecedor? fornecedor = repositorio.SelecionarPorId(id);
         if (fornecedor == null)
             return NotFound();
 

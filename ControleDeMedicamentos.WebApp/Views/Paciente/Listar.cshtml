@@ -1,6 +1,6 @@
-@model List<ListarFuncionarioViewModel>
+@model List<Paciente>
 
-<h2>Controle de Medicamentos</h2>
+<h2>Controle de Pacientes</h2>
 
 <hr />
 <a href="/">Inicio</a> /
@@ -10,10 +10,10 @@
 <a href="/Paciente/Listar">Pacientes</a> /
 <hr />
 
-<h1>Listagem De Funcionarios</h1>
+<h1>Listagem De Pacientes</h1>
 
 <p>
-    <a href="Cadastrar">Cadastrar Funcionario</a>
+    <a href="Cadastrar">Cadastrar Pacientes</a>
 </p>
 
 <table>
@@ -22,20 +22,24 @@
             <th>Id</th>
             <th>Nome</th>
             <th>Telefone</th>
+            <th>Cartão Sus</th>
+            <th>CPF</th>
         </tr>
     </thead>
 
     <tbody>
-        @foreach (ListarFuncionarioViewModel f in Model)
+        @foreach (Paciente p in Model)
         {
             <tr>
-                <td>@f.Id</td>
-                <td>@f.Nome</td>
-                <td>@f.Telefone</td>
+                <td>@p.Id</td>
+                <td>@p.Nome</td>
+                <td>@p.Telefone</td>
+                <td>@p.CartaoSus</td>
+                <td>@p.Cpf</td>
                 <td>
-                    <a href="Editar/@f.Id">Editar</a>
+                    <a href="Editar/@p.Id">Editar</a>
                     <span> | </span>
-                    <a href="Excluir/@f.Id">Excluir</a>
+                    <a href="Excluir/@p.Id">Excluir</a>
                 </td>
             </tr>
         }

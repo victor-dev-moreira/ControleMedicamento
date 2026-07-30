@@ -52,7 +52,7 @@ public sealed class MedicamentoController : Controller
     [HttpGet]
     public ActionResult Editar(int id)
     {
-        Medicamento medicamento = repositorioMedicamento.SelecionarPorId(id);
+        Medicamento? medicamento = repositorioMedicamento.SelecionarPorId(id);
         if (medicamento == null)
             return NotFound();
 
@@ -86,7 +86,7 @@ public sealed class MedicamentoController : Controller
 
     public ActionResult Excluir(int id)
     {
-        Medicamento medicamento = repositorioMedicamento.SelecionarPorId(id);
+        Medicamento? medicamento = repositorioMedicamento.SelecionarPorId(id);
         if (medicamento == null)
             return NotFound();
 

@@ -8,24 +8,32 @@
 <a href="/Paciente/Listar">Pacientes</a> /
 <hr />
 
-<h1>Cadastro De Fornecedor</h1>
+<h1>Cadastro De Pacientes</h1>
 
 <p>
-    <a href="Cadastrar">Cadastrar Fornecedor</a>
+    <a href="Cadastrar">Cadastrar Paciente</a>
 </p>
 
 <form action="Cadastrar" method="post">
     <div>
         <label for="nome">Nome</label>
+        <br>
         <input type="text" name="nome" id="nome">
     </div>
     <div>
         <label for="telefone">Telefone</label>
+        <br>
         <input type="text" name="telefone" id="telefone">
     </div>
     <div>
-        <label for="cnpj">CNPJ</label>
-        <input type="text" name="cnpj" id="cnpj">
+        <label for="cartaoSus">Cartão SUS</label>
+        <br>
+        <input type="text" name="cartaoSus" id="cartaoSus">
+    </div>
+    <div>
+        <label for="cpf">CPF</label>
+        <br>
+        <input type="text" name="cpf" id="cpf">
     </div>
 
     <button type="submit">Cadastrar</button>

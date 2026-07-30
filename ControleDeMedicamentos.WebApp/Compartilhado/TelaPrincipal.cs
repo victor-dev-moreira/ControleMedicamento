@@ -21,8 +21,8 @@ public class TelaPrincipal
         RepositorioFornecedorEmArquivo repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
         RepositorioMedicamentoEmArquivo repositorioMedicamento = new RepositorioMedicamentoEmArquivo(contexto);
         RepositorioRequisicaoEntradaEmArquivo repositorioRequisicao = new RepositorioRequisicaoEntradaEmArquivo(contexto);
-        RepositorioPacienteEmArquivo repositorioPacienteEmArquivo = new RepositorioPacienteEmArquivo(contexto);
-        RepositorioFuncionarioEmArquivo repositorioFuncionarioEmArquivo = new RepositorioFuncionarioEmArquivo(contexto);
+        ModuloPacientes.RepositorioPacienteEmArquivo repositorioPacienteEmArquivo = new ModuloPacientes.RepositorioPacienteEmArquivo(contexto);
+        ModuloFuncionarios.RepositorioPacienteEmArquivo repositorioFuncionarioEmArquivo = new ModuloFuncionarios.RepositorioPacienteEmArquivo(contexto);
 
         telaRequisicaoSaida = new TelaRequisicaoSaida(repositorioRequisicaoSaida, repositorioMedicamento, repositorioPacienteEmArquivo);
         telaFuncionario = new TelaFuncionario(repositorioFuncionarioEmArquivo);
