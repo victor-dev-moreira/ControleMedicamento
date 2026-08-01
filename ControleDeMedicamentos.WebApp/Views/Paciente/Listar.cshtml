@@ -1,16 +1,9 @@
 @model List<Paciente>
 
-<h2>Controle de Pacientes</h2>
-
-<hr />
-<a href="/">Inicio</a> /
-<a href="/Fornecedor/Listar">Fornecedores</a> /
-<a href="/Medicamento/Listar">Medicamentos</a> /
-<a href="/Funcionario/Listar">Funcionarios</a> /
-<a href="/Paciente/Listar">Pacientes</a> /
-<hr />
-
-<h1>Listagem De Pacientes</h1>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Listagem De Pacientes";
+}
 
 <p>
     <a href="Cadastrar">Cadastrar Pacientes</a>
