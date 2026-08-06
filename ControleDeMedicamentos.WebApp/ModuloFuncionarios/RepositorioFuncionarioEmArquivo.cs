@@ -1,9 +1,9 @@
 using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
 namespace ControleDeMedicamentos.WebApp.ModuloFuncionarios;
 
-public class RepositorioPacienteEmArquivo : RepositorioBaseEmArquivo<Funcionario>
+public class RepositorioFuncionarioEmArquivo : RepositorioBaseEmArquivo<Funcionario>
 {
-    public RepositorioPacienteEmArquivo(ContextoJson contexto) : base(contexto)
+    public RepositorioFuncionarioEmArquivo(ContextoJson contexto) : base(contexto)
     {
     }
     protected override List<Funcionario> ObterRegistros()

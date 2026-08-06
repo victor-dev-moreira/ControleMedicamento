@@ -14,6 +14,7 @@ WebApplication app = builder.Build();
 // Middlewares - funções que executam à cada requisição e resposta
 app.UseRouting();
 app.MapDefaultControllerRoute();
+app.UseStaticFiles();
 
 
 // Executa o servidor

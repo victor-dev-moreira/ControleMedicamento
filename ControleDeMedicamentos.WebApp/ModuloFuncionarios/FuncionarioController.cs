@@ -5,12 +5,12 @@ namespace ControleDeMedicamentos.WebApp.ModuloFuncionarios;
 
 public sealed class FuncionarioController : Controller
 {
-    private readonly RepositorioPacienteEmArquivo repositorioFuncionario;
+    private readonly RepositorioFuncionarioEmArquivo repositorioFuncionario;
     public FuncionarioController()
     {
         ContextoJson contextoJson = new ContextoJson();
         contextoJson.Carregar();
-        repositorioFuncionario = new RepositorioPacienteEmArquivo(contextoJson);
+        repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextoJson);
     }
 
     [HttpGet]
@@ -85,17 +85,24 @@ public sealed class FuncionarioController : Controller
 
     [HttpGet]
 
-    public ActionResult Excluir(int id)
+    public ActionResult Excluir(ExcluirFuncionarioViewModel excluirVm)
     {
-        Funcionario? funcionarios = repositorioFuncionario.SelecionarPorId(id);
+        Funcionario? funcionarios = repositorioFuncionario.SelecionarPorId(excluirVm.Id);
         if (funcionarios == null)
             return NotFound();
 
-        return View(funcionarios);
+        ExcluirFuncionarioViewModel viewModelExcluir = new ExcluirFuncionarioViewModel(
+            funcionarios.Id,
+            funcionarios.Nome
+
+        );
+
+        return View(viewModelExcluir);
     }
 
     [HttpPost]
-    public ActionResult Excluir(ExcluirFuncionarioViewModel excluirVm)
+    [ActionName("Excluir")]
+    public ActionResult ConfirmarExclusao(ExcluirFuncionarioViewModel excluirVm)
     {
         bool conseguiuExcluir = repositorioFuncionario.Excluir(excluirVm.Id);
 

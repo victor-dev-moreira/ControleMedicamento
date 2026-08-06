@@ -3,23 +3,24 @@
     ViewBag.Titulo = "Edição De Fornecedor";
 }
 
-<form action="/Fornecedor/Editar/@Model.Id" method="post">
-    <div>
-        <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome" value="@Model.Nome">
-    </div>
-    <div>
-        <label for="telefone">Telefone</label>
-        <input type="text" name="telefone" id="telefone" value="@Model.Telefone">
-    </div>
-    <div>
-        <label for="cnpj">CNPJ</label>
-        <input type="text" name="cnpj" id="cnpj" value="@Model.Cnpj">
-    </div>
+<div class="row">
+    <form class="col-6" action="/Fornecedor/Editar/@Model.Id" method="post">
+        <div>
+            <label class="form-label" for="nome">Nome</label>
+            <input class="form-control" type="text" name="nome" id="nome" value="@Model.Nome">
+        </div>
+        <div>
+            <label class="form-label" for="telefone">Telefone</label>
+            <input class="form-control" type="text" name="telefone" id="telefone" value="@Model.Telefone">
+        </div>
+        <div>
+            <label class="form-label" for="cnpj">CNPJ</label>
+            <input class="form-control" type="text" name="cnpj" id="cnpj" value="@Model.Cnpj">
+        </div>
 
-    <button type="submit">Confirmar Edicão</button>
-</form>
+        <button type="submit" class="btn btn-primary mt-3">Confirmar Edicão</button>
 
-<p>
-    <a href="Listar">Voltar para a Lista</a>
-</p>
+        <a class="btn btn-outline-secondary mt-3" href="Listar">Voltar para a Lista</a>
+    </form>
+</div>
+

@@ -9,26 +9,26 @@
     <a href="Cadastrar">Cadastrar Funcionario</a>
 </p>
 
-<form asp-action="Cadastrar" method="post">
-    <div>
-        <label asp-for="Nome"></label>
-        <br>
-        <input asp-for="Nome" type="text">
-    </div>
-    <div>
-        <label asp-for="Telefone"></label>
-        <br>
-        <input asp-for="Telefone" type="text">
-    </div>
-    <div>
-        <label asp-for="Cpf"></label>
-        <br>
-        <input asp-for="Cpf" type="text">
-    </div>
+<div class="row">
+    <form class="col-6" asp-action="Cadastrar" method="post">
+        <div>
+            <label class="form-label" asp-for="Nome"></label>
+            <br>
+            <input class="form-control" asp-for="Nome" type="text">
+        </div>
+        <div>
+            <label class="form-label" asp-for="Telefone"></label>
+            <br>
+            <input class="form-control" asp-for="Telefone" type="text">
+        </div>
+        <div>
+            <label class="form-label" asp-for="Cpf">CPF</label>
+            <br>
+            <input class="form-control" asp-for="Cpf" type="text">
+        </div>
 
-    <button type="submit"></button>
-</form>
+        <button type="submit" class="btn btn-primary mt-3"></button>
 
-<p>
-    <a asp-action="Listar">Voltar para a Lista</a>
-</p>
+        <a class="btn btn-outline-secondary mt-3" asp-action="Listar">Voltar para a Lista</a>
+    </form>
+</div>

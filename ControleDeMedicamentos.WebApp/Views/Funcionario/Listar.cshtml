@@ -6,31 +6,40 @@
 }
 
 <p>
-    <a href="Cadastrar">Cadastrar Funcionario</a>
+    <a class="btn btn-primary" href="Cadastrar">Cadastrar Funcionario</a>
 </p>
 
-<table>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>Telefone</th>
-        </tr>
-    </thead>
 
-    <tbody>
-        @foreach (ListarFuncionarioViewModel f in Model)
-        {
+@if (Model.Count == 0)
+{
+    <div class="alert alert-warning col-6" role="alert">
+        Não há funcionarios cadastrados!
+    </div>
+}
+else
+{
+    <table class="table table-striped table-hover">
+        <thead>
             <tr>
-                <td>@f.Id</td>
-                <td>@f.Nome</td>
-                <td>@f.Telefone</td>
-                <td>
-                    <a href="Editar/@f.Id">Editar</a>
-                    <span> | </span>
-                    <a href="Excluir/@f.Id">Excluir</a>
-                </td>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Telefone</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+
+        <tbody>
+            @foreach (ListarFuncionarioViewModel f in Model)
+            {
+                <tr>
+                    <td>@f.Id</td>
+                    <td>@f.Nome</td>
+                    <td>@f.Telefone</td>
+                    <td>
+                        <a href="Editar/@f.Id" class="btn btn-outline-primary">Editar</a>
+                        <a href="Excluir/@f.Id" class="btn btn-outline-primary">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
