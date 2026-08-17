@@ -1,21 +1,23 @@
+@model EditarFornecedorViewModel
+
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Edição De Fornecedor";
 }
 
 <div class="row">
-    <form class="col-lg-6" action="/Fornecedor/Editar/@Model.Id" method="post">
+    <form class="col-lg-6" asp-action="Editar" method="post">
         <div>
-            <label class="form-label" for="nome">Nome</label>
-            <input class="form-control" type="text" name="nome" id="nome" value="@Model.Nome">
+            <label class="form-label" asp-for="Nome"></label>
+            <input class="form-control" asp-for="Nome" type="text">
         </div>
         <div>
-            <label class="form-label" for="telefone">Telefone</label>
-            <input class="form-control" type="text" name="telefone" id="telefone" value="@Model.Telefone">
+            <label class="form-label" asp-for="Telefone"></label>
+            <input class="form-control" asp-for="Telefone" type="text">
         </div>
         <div>
-            <label class="form-label" for="cnpj">CNPJ</label>
-            <input class="form-control" type="text" name="cnpj" id="cnpj" value="@Model.Cnpj">
+            <label class="form-label" asp-for="Cnpj">CNPJ</label>
+            <input class="form-control" asp-for="Cnpj" type="text">
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">Confirmar Edicão</button>

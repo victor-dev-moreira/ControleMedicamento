@@ -1,4 +1,4 @@
-@model List<Medicamento>
+@model List<ListarMedicamentoViewModel>
 
 @{
     Layout = "_Layout";
@@ -6,35 +6,57 @@
 }
 
 <p>
-    <a href="Cadastrar">Cadastrar Medicamento</a>
+    <a class="btn btn-primary" asp-action="Cadastrar">
+        <i class="bi bi-patch-plus"></i>
+        Cadastrar Medicamento
+    </a>
 </p>
 
-<table>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>Descricão</th>
-            <th>Fornecedor</th>
-            <th>Estoque</th>
-        </tr>
-    </thead>
+@if (Model.Count == 0)
+{
+    <div class="alert alert-warning col-6" role="alert">
+        Não há medicamentos cadastrados!
+    </div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 g-3 mt-4">
 
-    <tbody>
-        @foreach (Medicamento m in Model)
+        @foreach (ListarMedicamentoViewModel m in Model)
         {
-            <tr>
-                <td>@m.Id</td>
-                <td>@m.Nome</td>
-                <td>@m.Descricao</td>
-                <td>@m.Fornecedor.Nome</td>
-                <td>@m.QuantidadeEmEstoque</td>
-                <td>
-                    <a href="Editar/@m.Id">Editar</a>
-                    <span> | </span>
-                    <a href="Excluir/@m.Id">Excluir</a>
-                </td>
-            </tr>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5>@m.Nome</h5>
+                            <span class="badge text-bg-secondary">@m.Id</span>
+                        </div>
+
+                        <dl class="row mb-2">
+                            <dt class="col-sm-4">Descrição</dt>
+                            <dd class="col-sm-8">@m.Descricao</dd>
+                        </dl>
+
+                        <dl class="row mb-2">
+                            <dt class="col-sm-4">Estoque</dt>
+                            <dd class="col-sm-8">@m.QuantidadeEmEstoque</dd>
+                        </dl>
+                        <dl class="row mb-2">
+                            <dt class="col-sm-4">Fornecedor</dt>
+                            <dd class="col-sm-8">@m.FornecedorM.Nome</dd>
+                        </dl>
+
+                        <div class="d-flex gap-2 justify-content-end mt-auto">
+                            <a asp-action="Editar" asp-route-id="@m.Id" class="btn btn-outline-primary" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a asp-action="Excluir" asp-route-id="@m.Id" class="btn btn-outline-danger" title="Excluir">
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+}

@@ -21,7 +21,20 @@ public sealed class MedicamentoController : Controller
     public ActionResult Listar()
     {
         List<Medicamento> medicamentos = repositorioMedicamento.SelecionarTodos();
-        return View(medicamentos);
+        List<ListarMedicamentoViewModel> viewModels = new List<ListarMedicamentoViewModel>();
+
+        foreach (Medicamento m in medicamentos)
+        {
+            ListarMedicamentoViewModel vm = new ListarMedicamentoViewModel(
+                m.Id,
+                m.Nome,
+                m.Descricao,
+                m.QuantidadeEmEstoque,
+                m.Fornecedor
+            );
+            viewModels.Add(vm);
+        }
+        return View(viewModels);
     }
 
     [HttpGet]
@@ -35,14 +48,14 @@ public sealed class MedicamentoController : Controller
     }
 
     [HttpPost]
-    public ActionResult Cadastrar(string nome, string descricao, int fornecedorId)
+    public ActionResult Cadastrar(CadastrarMedicamentoViewModel cadastrarVm)
     {
-        Fornecedor? fornecedor = repositorioFornecedor.SelecionarPorId(fornecedorId);
+        Fornecedor? fornecedor = repositorioFornecedor.SelecionarPorId(cadastrarVm.FornecedorId);
 
         if (fornecedor == null)
             return NotFound();
 
-        Medicamento medicamento = new Medicamento(nome, descricao, fornecedor);
+        Medicamento medicamento = new Medicamento(cadastrarVm.Nome, cadastrarVm.Descricao, fornecedor);
         repositorioMedicamento.Cadastrar(medicamento);
 
         return RedirectToAction(nameof(Listar));
@@ -60,20 +73,28 @@ public sealed class MedicamentoController : Controller
 
         ViewBag.Fornecedores = fornecedores;
 
-        return View(medicamento);
+
+        EditarMedicamentoViewModel viewModel = new EditarMedicamentoViewModel(
+            id,
+            medicamento.Nome,
+            medicamento.Descricao,
+            medicamento.Fornecedor.Id
+        );
+
+        return View(viewModel);
     }
 
     [HttpPost]
-    public ActionResult Editar(int id, string nome, string descricao, int fornecedorId)
+    public ActionResult Editar(EditarMedicamentoViewModel editarVm)
     {
-        Fornecedor? fornecedor = repositorioFornecedor.SelecionarPorId(fornecedorId);
+        Fornecedor? fornecedor = repositorioFornecedor.SelecionarPorId(editarVm.FornecedorId);
 
         if (fornecedor == null)
             return NotFound();
 
-        Medicamento medicamentoAtualizado = new Medicamento(nome, descricao, fornecedor);
+        Medicamento medicamentoAtualizado = new Medicamento(editarVm.Nome, editarVm.Descricao, fornecedor);
 
-        bool conseguiuEditar = repositorioMedicamento.Editar(id, medicamentoAtualizado);
+        bool conseguiuEditar = repositorioMedicamento.Editar(editarVm.Id, medicamentoAtualizado);
 
         if (!conseguiuEditar)
             return NotFound();
@@ -84,20 +105,25 @@ public sealed class MedicamentoController : Controller
 
     [HttpGet]
 
-    public ActionResult Excluir(int id)
+    public ActionResult Excluir(ExcluirMedicamentoViewModel excluirVm)
     {
-        Medicamento? medicamento = repositorioMedicamento.SelecionarPorId(id);
+        Medicamento? medicamento = repositorioMedicamento.SelecionarPorId(excluirVm.Id);
         if (medicamento == null)
             return NotFound();
 
-        return View(medicamento);
+        ExcluirMedicamentoViewModel viewModelExcluir = new ExcluirMedicamentoViewModel(
+            medicamento.Id,
+            medicamento.Nome
+        );
+
+        return View(viewModelExcluir);
     }
 
     [HttpPost]
     [ActionName("Excluir")]
-    public ActionResult ConfirmarExclusao(int id)
+    public ActionResult ConfirmarExclusao(ExcluirMedicamentoViewModel excluirVm)
     {
-        bool conseguiuExcluir = repositorioMedicamento.Excluir(id);
+        bool conseguiuExcluir = repositorioMedicamento.Excluir(excluirVm.Id);
 
         if (!conseguiuExcluir)
             return NotFound();

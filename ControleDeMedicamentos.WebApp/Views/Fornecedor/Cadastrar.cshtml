@@ -1,25 +1,27 @@
+@model CadastrarFornecedorViewModel;
+
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Cadastro De Fornecedor";
 }
 
 <p>
-    <a href="Cadastrar">Cadastrar Fornecedor</a>
+    <a asp-action="Cadastrar">Cadastrar Fornecedor</a>
 </p>
 
 <div class="row">
     <form class="col-lg-6" asp-action="Cadastrar" method="post">
         <div>
-            <label class="form-label" for="nome"></label>
-            <input class="form-control" type="text" name="nome" id="nome">
+            <label class="form-label" asp-for="Nome"></label>
+            <input class="form-control" asp-for="Nome" type="text">
         </div>
         <div class="mt-4">
-            <label class="form-label" for="telefone">Telefone</label>
-            <input class="form-control" type="text" name="telefone" id="telefone">
+            <label class="form-label" asp-for="Telefone"></label>
+            <input class="form-control" asp-for="Telefone" type="text">
         </div>
         <div class="mt-4">
-            <label class="form-label" for="cnpj">CNPJ</label>
-            <input class="form-control" type="text" name="cnpj" id="cnpj">
+            <label class="form-label" asp-for="Cnpj">CNPJ</label>
+            <input class="form-control" asp-for="Cnpj" type="text">
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">
@@ -27,7 +29,7 @@
             Cadastrar
         </button>
 
-        <a class="btn btn-outline-secondary mt-3" href="Listar">
+        <a class="btn btn-outline-secondary mt-3" asp-action="Listar">
             <i class="bi bi-arrow-return-left"></i>
             Voltar para a Lista</a>
         </form>

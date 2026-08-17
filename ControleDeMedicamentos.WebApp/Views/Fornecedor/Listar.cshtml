@@ -1,4 +1,4 @@
-@model List<Fornecedor>
+@model List<ListarFornecedorViewModel>
 
 @{
     Layout = "_Layout";
@@ -6,7 +6,7 @@
 }
 
 <p>
-    <a class="btn btn-primary" href="Cadastrar">
+    <a class="btn btn-primary" asp-action="Cadastrar">
         <i class="bi bi-patch-plus"></i>
         Cadastrar Fornecedor
     </a>
@@ -22,7 +22,7 @@ else
 {
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3 mt-4">
 
-        @foreach (Fornecedor f in Model)
+        @foreach (ListarFornecedorViewModel f in Model)
         {
             <div class="col">
                 <div class="card h-100">
@@ -41,10 +41,11 @@ else
                         </dl>
 
                         <div class="d-flex gap-2 justify-content-end mt-auto">
-                            <a href="Editar/@f.Id " class="btn btn-outline-primary" title="Editar">
+                            <a asp-action="Editar" asp-route-id="@f.Id" class="btn btn-outline-primary" title="Editar">
                                 <i class="bi bi-pencil"></i>
                             </a>
-                            <a href="Excluir/@f.Id" class="btn btn-outline-danger" title="Excluir">
+
+                            <a asp-action="Excluir" asp-route-id="@f.Id" class="btn btn-outline-danger" title="Excluir">
                                 <i class="bi bi-trash3"></i>
                             </a>
                         </div>
@@ -53,34 +54,4 @@ else
             </div>
         }
     </div>
-
-    @* <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nome</th>
-                <th>Telefone</th>
-                <th>CNPJ</th>
-                <th>Acões</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (Fornecedor f in Model)
-            {
-
-                <tr>
-                    <td>@f.Id</td>
-                    <td>@f.Nome</td>
-                    <td>@f.Telefone</td>
-                    <td>@f.Cnpj</td>
-                    <td>
-                        <a href="Editar/@f.Id " class="btn btn-outline-primary">Editar</a>
-                        <a href="Excluir/@f.Id" class="btn btn-outline-danger">Excluir</a>
-                    </td>
-                </tr>
-
-            }
-        </tbody>
-    </table> *@
 }

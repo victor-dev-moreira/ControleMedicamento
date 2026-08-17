@@ -1,34 +1,40 @@
-@using ControleDeMedicamentos.WebApp.ModuloFornecedores
+@model EditarMedicamentoViewModel
+
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Edição De Medicamento";
 }
 
-<form action="/Medicamento/Editar/@Model.Id" method="post">
-    <div>
-        <label for="nome">Nome</label>
-    </br>
-    <input type="text" name="nome" id="nome">
-</div>
-<div>
-    <label for="descricao">Descrição</label>
-</br>
-<textarea name="descricao" id="descricao"></textarea>
-</div>
-<div>
-    <label for="fornecedor">Fornecedor</label>
-</br>
-<select name="fornecedorId" id="fornecedorId">
-    @foreach (Fornecedor f in ViewBag.Fornecedores)
-    {
-        <option value="@f.Id">@f.Nome</option>
-    }
+<div class="row">
+    <form class="col-lg-6" asp-action="Editar" method="post">
+        <div>
+            <label class="form-label" asp-for="Nome"></label>
+            <input class="form-control" asp-for="Nome" type="text">
+        </div>
+        <div>
+            <label class="form-label" asp-for="Descricao">Descrição</label>
+            <textarea class="form-control" asp-for="Descricao" type="text"></textarea>
+        </div>
+        <div>
+            <label asp-for="FornecedorId">Fornecedor</label>
+        </br>
 
-</select>
-</br>
-<button type="submit">Confirmar Edição</button>
-</form>
+        <select class="form-select form-select-lg mb-3" name="FornecedorId" id="FornecedorId">
+            <option selected>Selecione Fornecedor</option>
+            @foreach (Fornecedor f in ViewBag.Fornecedores)
+            {
+                <option value="@f.Id">@f.Nome</option>
+            }
 
-<p>
-    <a href="Listar">Voltar para a Lista</a>
-</p>
+        </select>
+
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">
+        <i class="bi bi-check"></i>
+        Confirmar Edição
+    </button>
+
+    <a class="btn btn-outline-secondary mt-3" asp-action="Listar">
+        <i class="bi bi-arrow-return-left"></i>
+        Voltar para a Lista</a>
+    </form>
