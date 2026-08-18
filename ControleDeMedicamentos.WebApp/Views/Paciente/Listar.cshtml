@@ -1,4 +1,4 @@
-@model List<Paciente>
+@model List<ListarPacienteViewModel>
 
 @{
     Layout = "_Layout";
@@ -6,35 +6,53 @@
 }
 
 <p>
-    <a href="Cadastrar">Cadastrar Pacientes</a>
+    <a class="btn btn-primary" asp-action="Cadastrar">
+        <i class="bi bi-patch-plus"></i>
+        Cadastrar Paciente
+    </a>
 </p>
 
-<table>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>Telefone</th>
-            <th>Cartão Sus</th>
-            <th>CPF</th>
-        </tr>
-    </thead>
 
-    <tbody>
-        @foreach (Paciente p in Model)
+@if (Model.Count == 0)
+{
+    <div class="alert alert-warning col-6" role="alert">
+        Não há pacientes cadastrados!
+    </div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 g-3 mt-4">
+
+        @foreach (ListarPacienteViewModel p in Model)
         {
-            <tr>
-                <td>@p.Id</td>
-                <td>@p.Nome</td>
-                <td>@p.Telefone</td>
-                <td>@p.CartaoSus</td>
-                <td>@p.Cpf</td>
-                <td>
-                    <a href="Editar/@p.Id">Editar</a>
-                    <span> | </span>
-                    <a href="Excluir/@p.Id">Excluir</a>
-                </td>
-            </tr>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5>@p.Nome</h5>
+                            <span class="badge text-bg-secondary">@p.Id</span>
+                        </div>
+
+                        <dl class="row mb-2">
+                            <dt class="col-sm-4">Telefone</dt>
+                            <dd class="col-sm-8">@p.Telefone</dd>
+                        </dl>
+                        <dl class="row mb-2">
+                            <dt class="col-sm-4">Cartão SUS</dt>
+                            <dd class="col-sm-8">@p.CartaoSus</dd>
+                        </dl>
+
+                        <div class="d-flex gap-2 justify-content-end mt-auto">
+                            <a asp-action="Editar" asp-route-id="@p.Id" class="btn btn-outline-primary" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a asp-action="Excluir" asp-route-id="@p.Id" class="btn btn-outline-danger" title="Excluir">
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+}

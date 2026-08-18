@@ -11,14 +11,7 @@
         <div class="alert alert-danger" role="alert">
             Você deseja realmente excluir o registro "@Model.Nome"? Esta acão é irreversível.
         </div>
-
-        <div>
-            <label asp-for="Nome"></label>
-            <br>
-            <input asp-for="Nome" type="text" readonly>
-        </div>
-
         <button type="submit" class="btn btn-danger mt-3">Confirmar Exclusão</button>
-        <a class="btn btn-outline-secondary mt-3" href="Listar">Voltar para a Lista</a>
+        <a class="btn btn-outline-secondary mt-3" asp-action="Listar">Voltar para a Lista</a>
     </form>
 </div>

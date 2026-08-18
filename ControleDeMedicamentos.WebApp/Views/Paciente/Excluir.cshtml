@@ -1,17 +1,17 @@
+@model ExcluirPacienteViewModel;
+
 @{
     Layout = "_Layout";
-    ViewBag.Titulo = "Excluir De Paciente";
+    ViewBag.Titulo = "Exclusão De Funcionario";
 }
 
+<div class="row">
+    <form class="col-6" asp-action="Excluir" asp-route-id="@Model.Id" method="post">
 
-<form action="/Paciente/Excluir/@Model.Id" method="post">
-    <p>
-        Você deseja realmente excluir o registro "@Model.Nome"? Esta acão é irreversível.
-    </p>
-
-    <button type="submit">Confirmar Exclusão</button>
-</form>
-
-<p>
-    <a href="Listar">Voltar para a Lista</a>
-</p>
+        <div class="alert alert-danger" role="alert">
+            Você deseja realmente excluir o registro "@Model.Nome"? Esta acão é irreversível.
+        </div>
+        <button type="submit" class="btn btn-danger mt-3">Confirmar Exclusão</button>
+        <a class="btn btn-outline-secondary mt-3" asp-action="Listar">Voltar para a Lista</a>
+    </form>
+</div>

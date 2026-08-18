@@ -17,7 +17,22 @@ public sealed class PacienteController : Controller
     public ActionResult Listar()
     {
         List<Paciente> pacientes = repositorioPaciente.SelecionarTodos();
-        return View(pacientes);
+
+        List<ListarPacienteViewModel> viewModels = new List<ListarPacienteViewModel>();
+
+        foreach (Paciente p in pacientes)
+        {
+            ListarPacienteViewModel vm = new ListarPacienteViewModel(
+                p.Id,
+                p.Nome,
+                p.Telefone,
+                p.CartaoSus
+            );
+
+            viewModels.Add(vm);
+        }
+
+        return View(viewModels);
     }
 
     [HttpGet]
@@ -42,15 +57,23 @@ public sealed class PacienteController : Controller
         if (pacientes == null)
             return NotFound();
 
-        return View(pacientes);
+        EditarPacienteViewModel viewModel = new EditarPacienteViewModel(
+            id,
+            pacientes.Nome,
+            pacientes.Telefone,
+            pacientes.CartaoSus,
+            pacientes.Cpf
+        );
+
+        return View(viewModel);
     }
 
     [HttpPost]
-    public ActionResult Editar(int id, string nome, string telefone, string cartaoSus, string cpf)
+    public ActionResult Editar(EditarPacienteViewModel editarVm)
     {
-        Paciente funcionarioAtulizado = new Paciente(nome, telefone, cartaoSus, cpf);
+        Paciente funcionarioAtulizado = new Paciente(editarVm.Nome, editarVm.Telefone, editarVm.CartaoSus, editarVm.Cpf);
 
-        bool conseguiuEditar = repositorioPaciente.Editar(id, funcionarioAtulizado);
+        bool conseguiuEditar = repositorioPaciente.Editar(editarVm.Id, funcionarioAtulizado);
 
         if (!conseguiuEditar)
             return NotFound();
@@ -60,20 +83,24 @@ public sealed class PacienteController : Controller
 
     [HttpGet]
 
-    public ActionResult Excluir(int id)
+    public ActionResult Excluir(ExcluirPacienteViewModel excluirVm)
     {
-        Paciente? pacientes = repositorioPaciente.SelecionarPorId(id);
+        Paciente? pacientes = repositorioPaciente.SelecionarPorId(excluirVm.Id);
         if (pacientes == null)
             return NotFound();
 
-        return View(pacientes);
+        ExcluirPacienteViewModel viewModel = new ExcluirPacienteViewModel(
+            pacientes.Id,
+            pacientes.Nome
+        );
+        return View(viewModel);
     }
 
     [HttpPost]
     [ActionName("Excluir")]
-    public ActionResult ConfirmarExclusao(int id)
+    public ActionResult ConfirmarExclusao(ExcluirPacienteViewModel excluirVm)
     {
-        bool conseguiuExcluir = repositorioPaciente.Excluir(id);
+        bool conseguiuExcluir = repositorioPaciente.Excluir(excluirVm.Id);
 
         if (!conseguiuExcluir)
             return NotFound();

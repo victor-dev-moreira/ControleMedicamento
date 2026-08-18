@@ -1,29 +1,41 @@
+@model EditarPacienteViewModel;
+
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Edição De Paciente";
 }
 
-<form action="/Paciente/Editar/@Model.Id" method="post">
-    <div>
-        <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome" value="@Model.Nome">
-    </div>
-    <div>
-        <label for="telefone">Telefone</label>
-        <input type="text" name="telefone" id="telefone" value="@Model.Telefone">
-    </div>
-    <div>
-        <label for="cartaoSus">Cartão SUS</label>
-        <input type="text" name="cartaoSus" id="cartaoSus" value="@Model.CartaoSus">
-    </div>
-    <div>
-        <label for="cpf">CPF</label>
-        <input type="text" name="cpf" id="cpf" value="@Model.Cpf">
-    </div>
+<div class="row">
+    <form class="col-lg-6" asp-action="Editar" method="post">
+        <div>
+            <label class="form-label" asp-for="Nome"></label>
+            <br>
+            <input class="form-control" asp-for="Nome" type="text">
+        </div>
+        <div class="mt-4">
+            <label class="form-label" asp-for="Telefone"></label>
+            <br>
+            <input class="form-control" asp-for="Telefone" type="text">
+        </div>
+        <div class="mt-4">
+            <label class="form-label" asp-for="Cpf">CPF</label>
+            <br>
+            <input class="form-control" asp-for="Cpf" type="text">
+        </div>
 
-    <button type="submit">Confirmar Edicão</button>
-</form>
+        <div class="mt-4">
+            <label class="form-label" asp-for="CartaoSus">Cartão SUS</label>
+            <br>
+            <input class="form-control" asp-for="CartaoSus" type="text">
+        </div>
 
-<p>
-    <a href="Listar">Voltar para a Lista</a>
-</p>
+        <button type="submit" class="btn btn-primary mt-3">
+            <i class="bi bi-check"></i>
+            Cadastrar
+        </button>
+        <a class="btn btn-outline-secondary mt-3" asp-action="Listar">
+            <i class="bi bi-arrow-return-left"></i>
+            Voltar para a Lista
+        </a>
+    </form>
+</div>
