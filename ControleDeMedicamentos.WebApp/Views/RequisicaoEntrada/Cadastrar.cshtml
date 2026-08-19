@@ -1,0 +1,52 @@
+@model CadastrarRequisicaoEntradaViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Cadastro De Requisição de Entrada";
+}
+
+<div class="row">
+    <form class="col-lg-6" asp-action="Cadastrar" method="post">
+
+
+        <div>
+            <label class="form-label" asp-for="MedicamentoId">Medicamento</label>
+            <select class="form-select" asp-for="MedicamentoId">
+                <option selected value="">Selecione Medicamento</option>
+                @foreach (MedicamentoRequisicaoEntradaViewModel m in Model.Medicamentos)
+                {
+                    <option value="@m.Id">@m.Nome</option>
+                }
+            </select>
+        </div>
+
+        <div class="mt-4">
+            <label asp-for="FuncionarioId">Fornecedor</label>
+            <select class="form-select" asp-for="FuncionarioId">
+                <option selected value="">Selecione Funcionario</option>
+                @foreach (FuncionarioRequisicaoEntradaViewModel funcionario in Model.Funcionarios)
+                {
+                    <option value="@funcionario.Id">@funcionario.Nome</option>
+                }
+
+            </select>
+        </div>
+
+        <div class="mt-4">
+            <label class="form-label" asp-for="Quantidade">Quantidade</label>
+            <input class="form-control" asp-for="Quantidade"></input>
+        </div>
+
+        <div class="d-flex gap-3 mt-4">
+            <button class="btn btn-primary" type="submit">
+                <i class="bi bi-check"></i>
+                Cadastrar
+            </button>
+            <a class="btn btn-outline-secondary" asp-action="Listar">
+                <i class="bi bi-arrow-return-left"></i>
+                Voltar para a lista
+            </a>
+        </div>
+    </form>
+
+

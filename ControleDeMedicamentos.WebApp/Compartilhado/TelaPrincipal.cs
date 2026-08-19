@@ -21,15 +21,15 @@ public class TelaPrincipal
         RepositorioFornecedorEmArquivo repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
         RepositorioMedicamentoEmArquivo repositorioMedicamento = new RepositorioMedicamentoEmArquivo(contexto);
         RepositorioRequisicaoEntradaEmArquivo repositorioRequisicao = new RepositorioRequisicaoEntradaEmArquivo(contexto);
-        ModuloPacientes.RepositorioPacienteEmArquivo repositorioPacienteEmArquivo = new ModuloPacientes.RepositorioPacienteEmArquivo(contexto);
-        ModuloFuncionarios.RepositorioFuncionarioEmArquivo repositorioFuncionarioEmArquivo = new ModuloFuncionarios.RepositorioFuncionarioEmArquivo(contexto);
+        RepositorioPacienteEmArquivo repositorioPacienteEmArquivo = new RepositorioPacienteEmArquivo(contexto);
+        RepositorioFuncionarioEmArquivo repositorioFuncionarioEmArquivo = new RepositorioFuncionarioEmArquivo(contexto);
 
         telaRequisicaoSaida = new TelaRequisicaoSaida(repositorioRequisicaoSaida, repositorioMedicamento, repositorioPacienteEmArquivo);
         telaFuncionario = new TelaFuncionario(repositorioFuncionarioEmArquivo);
         telaPaciente = new TelaPaciente(repositorioPacienteEmArquivo);
         telaFornecedor = new TelaFornecedor(repositorioFornecedor);
         telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
-        telaRequisicaoEntrada = new TelaRequisicaoEntrada(repositorioRequisicao, repositorioMedicamento);
+        telaRequisicaoEntrada = new TelaRequisicaoEntrada(repositorioRequisicao, repositorioMedicamento, repositorioFuncionarioEmArquivo);
     }
 
     public ITelaOpcoes? ObterOpcaoMenuPrincipal()
