@@ -30,7 +30,7 @@ public class Medicamento : EntidadeBase
                 total += req.Quantidade;
 
             foreach (RequisicaoSaida reqSaida in RequisicoesSaida)
-                total -= reqSaida.QuantidadeSaida;
+                total -= reqSaida.ObterQuantidade(this);
 
             return total;
         }

@@ -11,12 +11,5 @@ public class RepositorioRequisicaoSaidaEmArquivo : RepositorioBaseEmArquivo<Requ
     {
         return contexto.RequisicoesSaida;
     }
-
-    public override void Cadastrar(RequisicaoSaida novoRegistro)
-    {
-        novoRegistro.MedicamentoSaida.RegistrarRequisicaoSaida(novoRegistro);
-        base.Cadastrar(novoRegistro);
-
-    }
 }
 

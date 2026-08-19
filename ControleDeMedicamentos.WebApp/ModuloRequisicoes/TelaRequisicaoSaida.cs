@@ -53,14 +53,14 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaOpcoes, ITela
 
         foreach (RequisicaoSaida r in registros)
         {
-            Console.WriteLine(
-                "{0, -7} | {1, -20} | {2, -10} | {3, -15} | {4, -25}",
-                r.Id,
-                r.MedicamentoSaida.Nome,
-                r.QuantidadeSaida,
-                r.Data.ToShortDateString(),
-                r.Paciente.Nome
-            );
+            // Console.WriteLine(
+            //     "{0, -7} | {1, -20} | {2, -10} | {3, -15} | {4, -25}",
+            //     r.Id,
+            //     r.MedicamentosPrescritos.Nome,
+            //     r.QuantidadeSaida,
+            //     r.Data.ToShortDateString(),
+            //     r.Paciente.Nome
+            // );
         }
 
         if (deveExibirCabecalho)
@@ -92,7 +92,8 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaOpcoes, ITela
 
         Paciente paciente = repositorioPaciente.SelecionarPorId(idPaciente)!;
 
-        return new RequisicaoSaida(medicamento, quantidade, paciente);
+        // return new RequisicaoSaida(medicamento, quantidade, paciente);
+        return null;
     }
 
     private void VisualizarMedicamentos()
