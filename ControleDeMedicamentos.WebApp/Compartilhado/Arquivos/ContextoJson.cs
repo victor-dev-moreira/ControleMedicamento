@@ -29,7 +29,6 @@ public class ContextoJson
 
         caminhoArquivoDados = Path.Join(caminhoDiretorioAplicativo, "dados.json");
     }
-
     public void Salvar()
     {
         JsonSerializerOptions options = new JsonSerializerOptions();
