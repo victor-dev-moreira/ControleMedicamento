@@ -10,17 +10,19 @@
         <div>
             <label class="form-label" asp-for="Nome"></label>
             <input class="form-control" asp-for="Nome" type="text">
+            <span class="text-danger" asp-validation-for="Nome"></span>
         </div>
         <div>
             <label class="form-label" asp-for="Descricao">Descrição</label>
             <textarea class="form-control" asp-for="Descricao" type="text"></textarea>
+            <span class="text-danger" asp-validation-for="Descricao"></span>
         </div>
         <div>
             <label asp-for="FornecedorId">Fornecedor</label>
         </br>
 
         <select class="form-select form-select-lg mb-3" name="FornecedorId" id="FornecedorId">
-            <option selected>Selecione Fornecedor</option>
+            <option selected value="">Selecione Fornecedor</option>
             @foreach (Fornecedor f in ViewBag.Fornecedores)
             {
                 <option value="@f.Id">@f.Nome</option>

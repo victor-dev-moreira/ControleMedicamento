@@ -6,8 +6,6 @@
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Habilita o armazenamento em JSON
-InjecaoDependencia.AddInfraestruturaEmJson(builder.Services);
-
 builder.Services.AddInfraestruturaEmJson();
 
 // Habilita o MVC = Model - View - Controller

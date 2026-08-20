@@ -9,24 +9,24 @@
     <form class="col-lg-6" asp-action="Editar" method="post">
         <div>
             <label class="form-label" asp-for="Nome"></label>
-            <br>
             <input class="form-control" asp-for="Nome" type="text">
+            <span class="text-danger" asp-validation-for="Nome"></span>
         </div>
         <div class="mt-4">
             <label class="form-label" asp-for="Telefone"></label>
-            <br>
             <input class="form-control" asp-for="Telefone" type="text">
+            <span class="text-danger" asp-validation-for="Telefone"></span>
         </div>
         <div class="mt-4">
             <label class="form-label" asp-for="Cpf">CPF</label>
-            <br>
             <input class="form-control" asp-for="Cpf" type="text">
+            <span class="text-danger" asp-validation-for="Cpf"></span>
         </div>
 
         <div class="mt-4">
             <label class="form-label" asp-for="CartaoSus">Cartão SUS</label>
-            <br>
             <input class="form-control" asp-for="CartaoSus" type="text">
+            <span class="text-danger" asp-validation-for="CartaoSus"></span>
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">

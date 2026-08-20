@@ -40,22 +40,36 @@ public sealed class MedicamentoController : Controller
     [HttpGet]
     public ActionResult Cadastrar()
     {
-        List<Fornecedor> fornecedores = repositorioFornecedor.SelecionarTodos();
+        CadastrarMedicamentoViewModel viewModel = new CadastrarMedicamentoViewModel(
+          string.Empty,
+          string.Empty,
+           0
+       ) with
+        { Fornecedores = ObterFornecedores() };
 
-        ViewBag.Fornecedores = fornecedores;
-
-        return View();
+        return View(viewModel);
     }
 
     [HttpPost]
     public ActionResult Cadastrar(CadastrarMedicamentoViewModel cadastrarVm)
     {
-        Fornecedor? fornecedor = repositorioFornecedor.SelecionarPorId(cadastrarVm.FornecedorId);
+        if (!ModelState.IsValid)
+        {
+            cadastrarVm = cadastrarVm with
+            { Fornecedores = ObterFornecedores() };
+            return View(cadastrarVm);
+        }
 
+        Fornecedor? fornecedor = repositorioFornecedor.SelecionarPorId(cadastrarVm.FornecedorId);
         if (fornecedor == null)
             return NotFound();
 
-        Medicamento medicamento = new Medicamento(cadastrarVm.Nome, cadastrarVm.Descricao, fornecedor);
+        Medicamento medicamento = new Medicamento(
+            cadastrarVm.Nome ?? string.Empty,
+            cadastrarVm.Descricao ?? string.Empty,
+            fornecedor
+            );
+
         repositorioMedicamento.Cadastrar(medicamento);
 
         return RedirectToAction(nameof(Listar));
@@ -69,17 +83,15 @@ public sealed class MedicamentoController : Controller
         if (medicamento == null)
             return NotFound();
 
-        List<Fornecedor> fornecedores = repositorioFornecedor.SelecionarTodos();
-
-        ViewBag.Fornecedores = fornecedores;
-
-
         EditarMedicamentoViewModel viewModel = new EditarMedicamentoViewModel(
             id,
             medicamento.Nome,
             medicamento.Descricao,
             medicamento.Fornecedor.Id
-        );
+        ) with
+        {
+            Fornecedores = ObterFornecedores()
+        };
 
         return View(viewModel);
     }
@@ -92,7 +104,14 @@ public sealed class MedicamentoController : Controller
         if (fornecedor == null)
             return NotFound();
 
-        Medicamento medicamentoAtualizado = new Medicamento(editarVm.Nome, editarVm.Descricao, fornecedor);
+        Medicamento medicamentoAtualizado = new Medicamento(
+            editarVm.Nome ?? string.Empty,
+            editarVm.Descricao ?? string.Empty,
+            fornecedor
+            );
+
+        if (!ModelState.IsValid)
+            return View(editarVm);
 
         bool conseguiuEditar = repositorioMedicamento.Editar(editarVm.Id, medicamentoAtualizado);
 
@@ -129,5 +148,22 @@ public sealed class MedicamentoController : Controller
             return NotFound();
 
         return RedirectToAction(nameof(Listar));
+    }
+
+    private List<FornecedorMedicamentoViewModel> ObterFornecedores()
+    {
+        List<FornecedorMedicamentoViewModel> fornecedores = [];
+
+        foreach (Fornecedor fornecedor in repositorioFornecedor.SelecionarTodos())
+        {
+            FornecedorMedicamentoViewModel viewModelFornecedor = new FornecedorMedicamentoViewModel(
+                fornecedor.Id,
+                fornecedor.Nome
+            );
+
+            fornecedores.Add(viewModelFornecedor);
+        }
+
+        return fornecedores;
     }
 }

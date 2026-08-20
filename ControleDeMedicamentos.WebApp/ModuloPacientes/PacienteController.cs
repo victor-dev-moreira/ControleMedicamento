@@ -40,9 +40,13 @@ public sealed class PacienteController : Controller
     }
 
     [HttpPost]
-    public ActionResult Cadastrar(string nome, string telefone, string cartaoSus, string cpf)
+    public ActionResult Cadastrar(CadastrarPacienteViewModel cadastrarVm)
     {
-        Paciente pacientes = new Paciente(nome, telefone, cartaoSus, cpf);
+        Paciente pacientes = new Paciente(cadastrarVm.Nome, cadastrarVm.Telefone, cadastrarVm.CartaoSus, cadastrarVm.Cpf);
+
+        if (!ModelState.IsValid)
+            return View(cadastrarVm);
+
         repositorioPaciente.Cadastrar(pacientes);
 
         return RedirectToAction(nameof(Listar));
@@ -70,6 +74,9 @@ public sealed class PacienteController : Controller
     public ActionResult Editar(EditarPacienteViewModel editarVm)
     {
         Paciente funcionarioAtulizado = new Paciente(editarVm.Nome, editarVm.Telefone, editarVm.CartaoSus, editarVm.Cpf);
+
+        if (!ModelState.IsValid)
+            return View(editarVm);
 
         bool conseguiuEditar = repositorioPaciente.Editar(editarVm.Id, funcionarioAtulizado);
 
